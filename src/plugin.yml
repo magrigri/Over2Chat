@@ -1,0 +1,5 @@
+name: Over2Chat
+version: 1.0
+main: fr.magrigri.main
+authors: [magrigri]
+description: tchat plugin

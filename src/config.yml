@@ -1,0 +1,239 @@
+#Will OverWrite all others plugin's prefix or nickname, etc
+# To avoid any conflict, you might disable their function. For example for essentials :
+#change-displayname: false
+#change-playerlist: false
+OverWritePreffix: true
+
+
+##########################################
+#                 TAB LIST               #
+##########################################
+# This section allow you to add the player prefix in the tablist
+# /!\ If you have a plugin that already change the displayname, you might disable it
+# For essentials it is:
+#change-displayname: false
+#change-playerlist: false
+#
+# If you want to use this feature, OverWritePreffix must also be set to true. /!\
+tabListEnabled: "true"
+
+
+
+##########################################
+#                MENTION                 #
+##########################################
+
+#when someone type the player name in the tchat play a sound
+mentionEnable: "true"
+
+#tag before the playername to play a sound. Let empty if you want to always play a sound when the player name is written
+mentionTag: "@"
+
+#sounds list https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Sound.html
+mentionPlaysound: "BLOCK_ANVIL_DESTROY"
+
+#permission to mention someone else - "ALL" to allow everybody
+#mentionPermission: "o2chat.mention"
+mentionPermission: "ALL"
+
+#Will also send a message to the mentioned player.
+#"true" to enable
+mentionSendMessage: "true"
+
+#Require mentionSendMessage: "true"
+#{mentionedPlayer}, you have been mentioned by {player}
+MentionMessage: "&9@{mentionedPlayer} &7vous avez été mentioné par &c@{player}"
+
+
+
+##########################################
+#                 TOP BAR                #
+##########################################
+#This top bar show up above the player's messages. You can click on it to execute an event (like opening a website)
+# For exemple, it will looks like that in the tchat:
+# [time] [website profil of magrigri] [answere] [private message] [ban] [kick]
+# [Premium] magrigri: Hello world
+# [Premium] magrigri: Hello world
+# [time] [website profil of steve] [answere] [private message] [ban] [kick]
+# [Premium] steve: Hi magrigri,
+# [Premium] steve: How are you ?
+
+#"true" to enable the top bar. "False to disable"
+topbarEnabled: "true"
+
+#true: If one player send multiple message, the topbar will be displayed only one time (like on discord with the displayname)
+groupTheMessages: "true"
+
+#if you want to also display the date use "dd-MM-yyyy HH:mm:ss"
+timeFormat: "HH:mm:ss"
+
+topbar:
+  #id:                          #this must be unique
+  #    toDisplay: "some text"      #The text that you want to display in the bar
+  #    onHover: "some text"              #The text that you want to display when the player over the "toDisplay" text (use \n for newline). put "" to disable
+  #    onClickEvent: "run|suggest|openurl"         #you can use : "run" (to run a command), "suggest" (to suggest a command), "openurl" (to open a website) - Put "" to do nothing
+  #    onClickValue: ""         #The command that will be run or suggest, or the url that will be opened
+  #    permission: "ALL"        #The permission that will will be required for the text to be displayed. Use "ALL" to let everybody view it without permission
+  #
+  #
+  #You can use {date} and {name} in "some text" fields
+  date:
+    toDisplay: "&7[{date}]&r "
+    onHover: ""
+    onClickEvent: ""
+    onClickValue: ""
+    permission: "ALL"
+  profil:
+    toDisplay: "&9[Profil&r&7]&r "
+    onHover: ""
+    onClickEvent: "openurl"
+    onClickValue: "https://www.over2craft.com/player/check.php?name={name}&table="
+    permission: "ALL"
+  answere:
+    toDisplay: "&9[Mentionner&r&7]&r "
+    onHover: "&2Mentionner {name} (&9@{name}&2)"
+    onClickEvent: "suggest"
+    onClickValue: "@{name} "
+    permission: "ALL"
+  mp:
+    toDisplay: "&9[Message&r&7]&r "
+    onHover: "&2Envoyer un message à &9{name} &2(&4/msg &9{name}&2)"
+    onClickEvent: "suggest"
+    onClickValue: "/msg {name} "
+    permission: "ALL"
+  warn:
+    toDisplay: "&c[Wa.&r&c]&r "
+    onHover: "&c/warn &9{name} &2<raison> \n &2Exemple : &c/warn {name} Attention au flood"
+    onClickEvent: "suggest"
+    onClickValue: "/warn {name} avertissement"
+    permission: "o2chat.warn"
+  kick:
+    toDisplay: "&c[Ki.&r&c]&r "
+    onHover: "&c/kick &9{name} &2<raison>"
+    onClickEvent: "suggest"
+    onClickValue: "/kick {name} <raison>"
+    permission: "o2chat.kick"
+  mute:
+    toDisplay: "&c[Mu.&r&c]&r "
+    onHover: "&c/mute &9{name} &2<durée> <raison> \n &2Durée possible : [m(minutes) | h(heures) | d(jours)] \n &2Exemple : &c/mute {name} 10m Provocations"
+    onClickEvent: "suggest"
+    onClickValue: "/mute {name} <durée> <raison>"
+    permission: "o2chat.mute"
+  ban:
+    toDisplay: "&c[Ba&r&c]&r "
+    onHover: "&c/ban &9{name} &2<durée> <raison> \n &2Durée possible : [m(minutes) | h(heures) | d(jours)] \n &2Exemple : &c/ban {name} 30d cheat"
+    onClickEvent: "suggest"
+    onClickValue: "/ban {name} <durée> <raison>"
+    permission: "o2chat.ban"
+
+
+
+##########################################
+#                  PREFIX                #
+##########################################
+
+# [prefix with priority 0][prefix with priority 1][prefix with  priority 2] [...others plugins prefix...] playername : message
+#
+# The latest prefix item overwrite the one before
+# For exemple, only the rankB prefix will be shown event if rankB has over2chat.rankA permission since they have the same "priority"
+#  rankA:
+#    permission: "over2chat.rankA"
+#    priority: 0 #0, 1 or 2
+#    stringToDisplay: "[Premium]"
+#  rankB:
+#    permission: "over2chat.rankB"
+#    priority: 0 #0, 1 or 2
+#    stringToDisplay: "[Bite]"
+#
+#
+#preffix:
+#  id: #THIS ID MUST NOT BE LONGER MORE THAN 5 CHARACTERES /!\ (it can only be more than 5 characters for players name, see below).
+#    permission: "o2chat.visiteurs"
+#    priority: 0 #0, 1 or 2
+#    stringToDisplay: "&8[Visiteur]"
+#
+#
+#
+#
+preffix:
+  Visit:
+    permission: "o2chat.visiteurs"
+    priority: 0 #0, 1 or 2
+    stringToDisplay: "&8[Visiteur]"
+  Membr:
+    permission: "o2chat.membres"
+    priority: 0 #0, 1 or 2
+    stringToDisplay: "&8[&9Membre&8] &9"
+  Habit:
+    permission: "o2chat.habitues"
+    priority: 0 #0, 1 or 2
+    stringToDisplay: "&8[&9&lHabitué&8] &9&l"
+  Ancie:
+    permission: "o2chat.anciens"
+    priority: 0 #0, 1 or 2
+    stringToDisplay: "&e◖ &eAncien&e ◗ &e"
+  Sages:
+    permission: "o2chat.sages"
+    priority: 0 #0, 1 or 2
+    stringToDisplay: "&e◖ &e&lSage&e ◗ &e&l"
+  Vips:
+    permission: "o2chat.vips"
+    priority: 1 #0, 1 or 2
+    stringToDisplay: "&6&l【V】"
+  Premi:
+    permission: "o2chat.premiums"
+    priority: 1 #0, 1 or 2
+    stringToDisplay: "&&5&l【P】"
+  Anima:
+    permission: "o2chat.animateur"
+    priority: 2 #0, 1 or 2
+    stringToDisplay: "&8[&3Animateur&8] &3"
+  Gardi:
+    permission: "o2chat.gardien"
+    priority: 2 #0, 1 or 2
+    stringToDisplay: "&8[&aGardien&8] &a"
+  Moder:
+    permission: "o2chat.modo"
+    priority: 2 #0, 1 or 2
+    stringToDisplay: "&8[&2Modo&8] &2"
+  Dev:
+    permission: "o2chat.dev"
+    priority: 2 #0, 1 or 2
+    stringToDisplay: "&8[&cDev&8] &c"
+  Admin:
+    permission: "o2chat.admin"
+    priority: 2 #0, 1 or 2
+    stringToDisplay: "&8[&4Admin&8] &4"
+
+  #
+  #/!\ OPERATORS PREFIX /!\
+  #
+  # You need to manually add the prefix you want to display for any operators.
+  #"defaultOperator" will be the prefix displayed if the operator is not in this list
+  #(Btw, if an operator of your server op someone else without your authorization, you will be able to quickly spot him).
+  #
+  #You can also use this section to override prefix for a specific user.
+  #
+  #pseudo:
+  #    prefix0: "[prefix you want to display]"
+  #    prefix1: ""
+  #    prefix2: ""
+  #
+  # DO NOT REMOVE "defaultOperator"
+  defaultOperator:
+    prefix0: "&8[&cOperateur&8] &c"
+    prefix1: ""
+    prefix2: ""
+  magrigri:
+    prefix0: "&8[&cDev&8] &c"
+    prefix1: ""
+    prefix2: ""
+  genaysis:
+    prefix0: "&8[&4Adminitrateur&8] &4"
+    prefix1: ""
+    prefix2: ""
+
+#you have to defined a separator, for exemple " : " will look like this -> [prefixs] pseudo : message
+MessageSeparator: "&r&7: &r"
+
+
