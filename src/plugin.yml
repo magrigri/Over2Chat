@@ -3,3 +3,10 @@ version: 1.0
 main: fr.magrigri.main
 authors: [magrigri]
 description: tchat plugin
+commands:
+  topbardisable:
+    description: Disable the over2chat topbar
+    usage: /topbardisable
+  topbarenable:
+    description: enable the over2chat topbar
+    usage: /topbarenable

@@ -10,14 +10,49 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 class topBar {
 
     private static String lastPname = "empty";
+    private static ArrayList<String> disabled = new ArrayList<>();
 
-    topBar(){
 
+    void getDisabledFromConfig(){
+        List<String> sec = main.getPlugin().getConfig().getStringList("disabled");
+        for(String key : sec) {
+
+            setDisabled(key);
+
+
+        }
+
+
+    }
+
+    void setDisabledToConfig(){
+        if(disabled.isEmpty()){
+            return;
+        }
+        System.out.print("[Over2Chat] Writing disabled uuid to config file in disabled section..");
+        main.getPlugin().getConfig().set("disabled", disabled);
+        main.getPlugin().saveConfig();
+    }
+
+
+    void setDisabled(String playername){
+        if(!disabled.contains(playername)){
+            disabled.add(playername);
+        }
+
+    }
+
+    void setDisabledRemove(String playername){
+        if(disabled.contains(playername)) {
+            disabled.remove(playername);
+        }
     }
 
     private String placeHolder(String str, Player p){
@@ -71,7 +106,9 @@ class topBar {
 
         if(!main.getPlugin().getConfig().getString("groupTheMessages").equalsIgnoreCase("true")){
             for (Player item : e.getRecipients()) {
-                item.spigot().sendMessage(getTopBar(e.getPlayer(), item));
+                if(!disabled.contains(item.getUniqueId().toString())) {
+                    item.spigot().sendMessage(getTopBar(e.getPlayer(), item));
+                }
             }
         }else {
             if (lastPname.equalsIgnoreCase(e.getPlayer().getName())) {
@@ -79,7 +116,9 @@ class topBar {
             } else {
                 lastPname = e.getPlayer().getName();
                 for (Player item : e.getRecipients()) {
-                    item.spigot().sendMessage(getTopBar(e.getPlayer(), item));
+                    if(!disabled.contains(item.getUniqueId().toString())) {
+                        item.spigot().sendMessage(getTopBar(e.getPlayer(), item));
+                    }
                 }
             }
         }

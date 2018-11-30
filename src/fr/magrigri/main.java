@@ -2,7 +2,6 @@ package fr.magrigri;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -21,11 +20,16 @@ public final class main extends JavaPlugin implements Listener{
         plugin = this;
         saveDefaultConfig();
         getServer().getPluginManager().registerEvents(this, this);
+        getCommand("topbardisable").setExecutor(new disableCommand());
+        getCommand("topbarenable").setExecutor(new enableCommand());
+        topBar topbar = new topBar();
+        topbar.getDisabledFromConfig();
     }
 
     @Override
     public void onDisable() {
-        // Plugin shutdown logic
+        topBar topbar = new topBar();
+        topbar.setDisabledToConfig();
     }
 
     static main getPlugin(){
@@ -44,6 +48,7 @@ public final class main extends JavaPlugin implements Listener{
 
         preffix preffix = new preffix();
         e.setFormat(preffix.getFullMessage(p));
+
 
         mention mention = new mention();
         mention.sendMention(e);
