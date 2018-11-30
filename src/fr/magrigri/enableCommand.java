@@ -14,6 +14,12 @@ public class enableCommand implements CommandExecutor {
             Player player = (Player) commandSender;
             topBar topbar = new topBar();
             topbar.setDisabledRemove(player.getUniqueId().toString());
+            if(main.getPlugin().getConfig().getString("lang.topbarenabled").isEmpty()){
+                commandSender.sendMessage("Top bar has been disabled");
+            }else{
+                commandSender.sendMessage(main.getPlugin().getConfig().getString("lang.topbarenabled"));
+            }
+
             return true;
         }
 

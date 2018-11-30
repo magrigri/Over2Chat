@@ -10,3 +10,6 @@ commands:
   topbarenable:
     description: enable the over2chat topbar
     usage: /topbarenable
+  topbareload:
+    description: reload over2chat
+    usage: /topbareload

@@ -22,6 +22,7 @@ public final class main extends JavaPlugin implements Listener{
         getServer().getPluginManager().registerEvents(this, this);
         getCommand("topbardisable").setExecutor(new disableCommand());
         getCommand("topbarenable").setExecutor(new enableCommand());
+        getCommand("topbareload").setExecutor(new reloadCommand());
         topBar topbar = new topBar();
         topbar.getDisabledFromConfig();
     }

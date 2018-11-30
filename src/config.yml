@@ -1,7 +1,7 @@
 #Will OverWrite all others plugin's prefix or nickname, etc
-# To avoid any conflict, you might disable their function. For example for essentials :
-#change-displayname: false
-#change-playerlist: false
+# To avoid any conflict, you might disable their function. For example for essentials : change-displayname: false and change-playerlist: false
+#
+
 OverWritePreffix: true
 
 
@@ -238,6 +238,10 @@ MessageSeparator: "&r&7: &r"
 
 
 disabled:
-  gfds:
+
+
+lang:
+  topbardisabled: "La topbar à été désactivée"
+  topbarenabled: "La topbar à été activée"
 
 
