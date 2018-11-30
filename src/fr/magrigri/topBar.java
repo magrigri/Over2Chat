@@ -28,7 +28,7 @@ class topBar {
         return colored.replace("{date}", format.format(now)).replace("{name}", p.getName());
     }
 
-    TextComponent getTopBar(Player p){
+    TextComponent getTopBar(Player p, Player item){
 
         TextComponent barMessage = new TextComponent("");
 
@@ -41,7 +41,7 @@ class topBar {
             String onClickValue = placeHolder(main.getPlugin().getConfig().getString("topbar." + key + ".onClickValue"), p);
             String permission = main.getPlugin().getConfig().getString("topbar." + key + ".permission");
 
-            if(p.hasPermission(permission) || permission.equalsIgnoreCase("ALL")){
+            if(item.hasPermission(permission) || permission.equalsIgnoreCase("ALL")){
 
                 TextComponent textComponent = new TextComponent(toDisplay);
 
@@ -71,7 +71,7 @@ class topBar {
 
         if(!main.getPlugin().getConfig().getString("groupTheMessages").equalsIgnoreCase("true")){
             for (Player item : e.getRecipients()) {
-                item.spigot().sendMessage(getTopBar(e.getPlayer()));
+                item.spigot().sendMessage(getTopBar(e.getPlayer(), item));
             }
         }else {
             if (lastPname.equalsIgnoreCase(e.getPlayer().getName())) {
@@ -79,7 +79,7 @@ class topBar {
             } else {
                 lastPname = e.getPlayer().getName();
                 for (Player item : e.getRecipients()) {
-                    item.spigot().sendMessage(getTopBar(item));
+                    item.spigot().sendMessage(getTopBar(e.getPlayer(), item));
                 }
             }
         }
